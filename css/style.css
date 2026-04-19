@@ -1,0 +1,328 @@
+/* ============================================================
+   style.css — AVM Indoor Navigation
+   ============================================================ */
+
+:root {
+  --bg:       #0d0f14;
+  --surface:  #151820;
+  --surface2: #1c2030;
+  --border:   #252a3a;
+  --accent:   #4f8cff;
+  --accent2:  #00e5c3;
+  --warn:     #ff6b4a;
+  --text:     #e8eaf2;
+  --muted:    #6b7394;
+
+  /* Node / geçiş renkleri */
+  --elevator:  #ffd166;
+  --escalator: #a29bfe;
+  --stair:     #fd79a8;
+  --store:     #55efc4;
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logo { font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+.logo span { color: var(--accent); }
+.subtitle { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.divider  { flex: 1; }
+
+/* Kat toggle */
+.floor-toggle {
+  display: flex;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.floor-btn {
+  padding: 7px 16px;
+  font-weight: 700;
+  font-size: 12px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.floor-btn.active { background: var(--accent); color: #fff; }
+
+/* ============================================================
+   ANA LAYOUT
+   ============================================================ */
+.main { display: flex; flex: 1; overflow: hidden; }
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  width: 300px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sidebar-inner { padding: 16px; overflow-y: auto; flex: 1; }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* Mağaza kartları */
+.dest-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+.dest-card {
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dest-card:hover    { border-color: var(--accent); }
+.dest-card.selected { border-color: var(--accent); background: rgba(79,140,255,0.08); }
+
+.dest-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.dest-name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+.dest-meta { font-size: 11px; color: var(--muted); }
+
+.dest-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.dest-card.selected .dest-check { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Erişilebilirlik toggle */
+.access-toggle {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+
+.access-toggle.on { border-color: var(--elevator); background: rgba(255,209,102,0.07); }
+
+.toggle-icon { font-size: 20px; flex-shrink: 0; }
+
+.toggle-text strong { font-weight: 700; font-size: 12px; display: block; margin-bottom: 2px; }
+.toggle-text span   { font-size: 10px; color: var(--muted); }
+
+.sw {
+  width: 34px; height: 18px;
+  background: var(--border);
+  border-radius: 9px;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.sw::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  top: 3px; left: 3px;
+  transition: transform 0.2s;
+}
+.access-toggle.on .sw             { background: var(--elevator); }
+.access-toggle.on .sw::after      { transform: translateX(16px); }
+
+/* Rota butonu */
+.route-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+.route-btn:hover    { background: #6b9fff; transform: translateY(-1px); }
+.route-btn:disabled { background: var(--surface2); color: var(--muted); transform: none; cursor: default; }
+
+/* Hata mesajı */
+.no-route {
+  background: rgba(255,107,74,0.08);
+  border: 1px solid rgba(255,107,74,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: var(--warn);
+  display: none;
+}
+.no-route.visible { display: block; }
+
+/* Rota sonucu */
+.route-result         { display: none; }
+.route-result.visible { display: block; }
+
+.route-stats { display: flex; gap: 6px; margin-bottom: 14px; }
+
+.stat-box {
+  flex: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.stat-val {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--accent2);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Adım listesi */
+.route-steps { display: flex; flex-direction: column; gap: 5px; }
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--surface2);
+  border-radius: 7px;
+  border-left: 3px solid transparent;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.step.walk     { border-color: var(--accent);    }
+.step.elevator { border-color: var(--elevator);  }
+.step.escalator{ border-color: var(--escalator); }
+.step.stair    { border-color: var(--stair);     }
+.step.dest     { border-color: var(--store);     }
+
+.step-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.step-dist { font-size: 9px; color: var(--muted); margin-top: 2px; }
+
+/* ============================================================
+   GÖSTERGE
+   ============================================================ */
+.legend {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+.legend-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* ============================================================
+   HARİTA (Canvas)
+   ============================================================ */
+.map-wrap { flex: 1; position: relative; overflow: hidden; }
+
+canvas {
+  display: block;
+  cursor: grab;
+}
+canvas:active { cursor: grabbing; }
+
+.floor-badge {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+.floor-badge span { color: var(--accent); }
+
+.tooltip {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  pointer-events: none;
+  display: none;
+  z-index: 100;
+  max-width: 180px;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AVM İçi Navigasyon</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="logo">indoor<span>nav</span></div>
+      <div class="subtitle">AVM Navigasyon Demo</div>
+    </div>
+    <div class="divider"></div>
+    <div class="floor-toggle">
+      <button class="floor-btn active" id="btn-floor0">Zemin Kat</button>
+      <button class="floor-btn"        id="btn-floor1">1. Kat</button>
+    </div>
+  </header>
+
+  <!-- ANA LAYOUT -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-inner">
+
+        <div class="section-label">Gidilecek Mağaza</div>
+        <div class="dest-cards">
+
+          <div class="dest-card" id="card-29">
+            <div class="dest-icon" style="background:rgba(85,239,196,.12)">👗</div>
+            <div>
+              <div class="dest-name">DeFacto</div>
+              <div class="dest-meta">1. Kat · Moda &amp; Giyim</div>
+            </div>
+            <div class="dest-check" id="chk-29">✓</div>
+          </div>
+
+          <div class="dest-card" id="card-30">
+            <div class="dest-icon" style="background:rgba(255,107,74,.12)">🫒</div>
+            <div>
+              <div class="dest-name">B-Oil</div>
+              <div class="dest-meta">1. Kat · Gurme &amp; Organik</div>
+            </div>
+            <div class="dest-check" id="chk-30">✓</div>
+          </div>
+
+        </div>
+
+        <div class="section-label">Erişilebilirlik</div>
+        <div class="access-toggle" id="accessToggle">
+          <div class="toggle-icon">♿</div>
+          <div class="toggle-text">
+            <strong>Tekerlekli Sandalye Modu</strong>
+            <span>Sadece asansör kullanılır</span>
+          </div>
+          <div class="sw"></div>
+        </div>
+
+        <button class="route-btn" id="routeBtn" disabled>Rota Hesapla</button>
+
+        <div class="no-route" id="noRoute">
+          ⚠️ Bu ayarla uygun rota bulunamadı.
+        </div>
+
+        <div class="route-result" id="routeResult">
+          <div class="section-label" style="margin-bottom:8px">Rota Özeti</div>
+          <div class="route-stats">
+            <div class="stat-box"><div class="stat-val" id="statDist">–</div><div class="stat-label">Metre</div></div>
+            <div class="stat-box"><div class="stat-val" id="statTime">–</div><div class="stat-label">Dakika</div></div>
+            <div class="stat-box"><div class="stat-val" id="statSteps">–</div><div class="stat-label">Adım</div></div>
+          </div>
+          <div class="section-label" style="margin-bottom:6px">Adım Adım</div>
+          <div class="route-steps" id="routeSteps"></div>
+        </div>
+
+      </div><!-- /sidebar-inner -->
+
+      <!-- GÖSTERGE -->
+      <div class="legend">
+        <div class="section-label">Gösterge</div>
+        <div class="legend-grid">
+          <div class="legend-item"><div class="legend-dot" style="background:#4f8cff"></div>Giriş</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ffd166"></div>Asansör</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#a29bfe"></div>Yürüyen Merdiven</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#fd79a8"></div>Merdiven</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#55efc4"></div>Mağaza Girişi</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#4a5270"></div>Bağlantı Noktası</div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+    <!-- HARİTA -->
+    <div class="map-wrap" id="mapWrap">
+      <canvas id="c"></canvas>
+      <div class="floor-badge" id="floorBadge">Görüntülenen: <span>Zemin Kat</span></div>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+
+  </div><!-- /main -->
+
+  <!--
+    Script yükleme sırası önemli:
+    1. data    — NODES, EDGES, GEO_BOUNDS sabitlerini tanımlar
+    2. graph   — buildGraph, dijkstra (data.js'e bağımlı)
+    3. renderer— Renderer sınıfı (data.js + graph.js'e bağımlı)
+    4. ui      — UI sınıfı (graph.js + renderer.js'e bağımlı)
+    5. main    — her şeyi başlatır
+  -->
+  <script src="js/data.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
