@@ -135,12 +135,12 @@ No JavaScript changes needed.
 
 | Type             | Color  | Description          |
 |------------------|--------|----------------------|
-| `entrance`       | 🔵 Blue   | Building entrance    |
-| `elevator`       | 🟡 Yellow | Elevator             |
-| `escalator`      | 🟣 Purple | Escalator            |
-| `stair`          | 🩷 Pink   | Staircase            |
-| `store_entrance` | 🟢 Green  | Store entrance       |
-| `node`           | ⚫ Dark   | Routing waypoint     |
+| `entrance`       |  Blue   | Building entrance    |
+| `elevator`       |  Yellow | Elevator             |
+| `escalator`      |  Purple | Escalator            |
+| `stair`          |  Pink   | Staircase            |
+| `store_entrance` |  Green  | Store entrance       |
+| `node`           |  Dark   | Routing waypoint     |
 
 ---
 
