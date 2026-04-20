@@ -37,22 +37,22 @@ An indoor navigation demo built with pure HTML/CSS/JavaScript, running on georef
 
 ```
 indoor-nav/
-├── index.html              # Main HTML shell
+├── index.html              
 ├── css/
-│   └── style.css           # All styles
+│   └── style.css           
 ├── js/
-│   ├── data.js             # Loads & parses GeoJSON, converts coordinates
-│   ├── graph.js            # Graph builder + Dijkstra algorithm
-│   ├── renderer.js         # Canvas drawing engine
-│   ├── ui.js               # Sidebar interactions & step list
-│   └── main.js             # App bootstrap (async loader)
+│   ├── data.js            
+│   ├── graph.js            
+│   ├── renderer.js         
+│   ├── ui.js               
+│   └── main.js             
 ├── assets/
-│   ├── floor-0.png         # Ground floor plan image
-│   ├── floor-1.png         # Floor 1 plan image
-│   ├── nodes.geojson       # Node data (QGIS export)
-│   └── edges.geojson       # Edge data (QGIS export)
+│   ├── floor-0.png         
+│   ├── floor-1.png         
+│   ├── nodes.geojson       
+│   └── edges.geojson       
 ├── docs/
-│   └── screenshots/        # Place your screenshots here
+│   └── screenshots/        
 │       ├── main-view.png
 │       ├── route-planning.png
 │       └── wheelchair-mode.png
