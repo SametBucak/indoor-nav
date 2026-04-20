@@ -1,8 +1,4 @@
-/**
- * renderer.js
- * Canvas üzerinde kat planı, node'lar ve rota çizimi.
- * Dış bağımlılık: data.js (NODES, EDGES, GEO_BOUNDS) ve graph.js (nodeById)
- */
+
 
 const TYPE_COLOR = {
   entrance:      "#4f8cff",
@@ -23,18 +19,14 @@ const TYPE_LABEL = {
 };
 
 class Renderer {
-  /**
-   * @param {HTMLCanvasElement} canvas
-   * @param {HTMLImageElement[]} images  - [floor0Img, floor1Img]
-   * @param {HTMLElement} tooltip
-   */
+  
   constructor(canvas, images, tooltip) {
     this.canvas  = canvas;
     this.ctx     = canvas.getContext("2d");
     this.images  = images;
     this.tooltip = tooltip;
 
-    // Görünüm durumu
+    
     this.W = 0;
     this.H = 0;
     this.scale  = 1;
@@ -42,7 +34,7 @@ class Renderer {
     this.offY   = 0;
     this.floor  = 0;
 
-    // Çizim durumu
+    
     this.routePath    = null;
     this.selectedDest = null;
 
@@ -55,11 +47,7 @@ class Renderer {
     this._loop();
   }
 
-  // ------------------------------------------------------------------
-  // Genel yardımcılar
-  // ------------------------------------------------------------------
-
-  /** Coğrafi koordinatı → canvas pikselie dönüştür */
+  
   geoToCanvas(lat, lng) {
     const b   = GEO_BOUNDS[this.floor];
     const img = this.images[this.floor];
@@ -71,7 +59,7 @@ class Renderer {
     ];
   }
 
-  /** Canvas pikselini → coğrafi koordinata dönüştür */
+  
   canvasToGeo(cx, cy) {
     const b   = GEO_BOUNDS[this.floor];
     const img = this.images[this.floor];
@@ -83,7 +71,7 @@ class Renderer {
     };
   }
 
-  /** Görünümü seçili kata sığdır */
+  
   fitFloor() {
     const img = this.images[this.floor];
     if (!img.naturalWidth) return;
@@ -95,7 +83,7 @@ class Renderer {
     this.offY  = (this.H - img.naturalHeight * this.scale) / 2;
   }
 
-  /** Canvas boyutunu kapsayıcıya eşitle */
+  
   resize() {
     const wrap = this.canvas.parentElement;
     this.W = this.canvas.width  = wrap.clientWidth;
@@ -108,9 +96,7 @@ class Renderer {
     this.fitFloor();
   }
 
-  // ------------------------------------------------------------------
-  // Çizim
-  // ------------------------------------------------------------------
+  
 
   _loop() {
     this._draw();
@@ -201,7 +187,7 @@ class Renderer {
       const r     = isSpecial ? 10 : 6;
       const color = TYPE_COLOR[n.type] || "#888";
 
-      // Pulse halkası — seçili hedef için
+      
       if (this.selectedDest === n.id) {
         const t = (now % 1400) / 1400;
         ctx.save();
@@ -214,7 +200,7 @@ class Renderer {
         ctx.restore();
       }
 
-      // Node çevresi
+      
       ctx.save();
       ctx.shadowColor = color;
       ctx.shadowBlur  = 8;
@@ -229,7 +215,7 @@ class Renderer {
       ctx.restore();
     });
 
-    // Başlangıç node'unu vurgula (Ana Giriş id=1)
+    
     const start = nodeById(1);
     if (start && start.floor === this.floor) {
       const [sx, sy] = this.geoToCanvas(start.lat, start.lng);
@@ -248,14 +234,12 @@ class Renderer {
     }
   }
 
-  // ------------------------------------------------------------------
-  // Etkileşim olayları
-  // ------------------------------------------------------------------
+  
 
   _bindEvents() {
     const c = this.canvas;
 
-    // Pan
+    
     c.addEventListener("mousedown", (e) => {
       this._dragging  = true;
       this._dragStart = [e.clientX, e.clientY];
@@ -274,7 +258,7 @@ class Renderer {
       this.tooltip.style.display = "none";
     });
 
-    // Zoom
+    
     c.addEventListener("wheel", (e) => {
       e.preventDefault();
       const rect   = c.getBoundingClientRect();
@@ -287,7 +271,7 @@ class Renderer {
       this.scale   = ns;
     }, { passive: false });
 
-    // Touch
+    
     c.addEventListener("touchstart", (e) => {
       if (e.touches.length === 1) {
         this._dragging  = true;
