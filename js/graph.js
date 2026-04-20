@@ -17,7 +17,7 @@ function buildGraph(wheelchairMode = false) {
 }
 
 
- */
+
 function dijkstra(graph, startId, endId) {
   const dist   = {};
   const prev   = {};
