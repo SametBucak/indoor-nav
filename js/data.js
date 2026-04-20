@@ -1,10 +1,4 @@
-/**
- * data.js
- * GeoJSON dosyalarını (EPSG:3857) okur, WGS84'e dönüştürür
- * ve global NODES / EDGES / GEO_BOUNDS sabitlerini oluşturur.
- *
- * Bağımlılık: assets/nodes.geojson, assets/edges.geojson
- */
+
 
 const GEO_BOUNDS = {
   0: {
@@ -21,22 +15,18 @@ const GEO_BOUNDS = {
   },
 };
 
-// Çalışma zamanında doldurulacak — loadData() tamamlandıktan sonra hazır olur
+
 let NODES = [];
 let EDGES = [];
 
-// ------------------------------------------------------------------
-// Koordinat dönüşümü: EPSG:3857 (Web Mercator) → WGS84
-// ------------------------------------------------------------------
+
 function mercToWgs84(x, y) {
   const lng = (x / 20037508.34) * 180;
   const lat = (Math.atan(Math.exp((y / 20037508.34) * Math.PI)) / Math.PI) * 360 - 90;
   return { lat, lng };
 }
 
-// ------------------------------------------------------------------
-// GeoJSON dosyalarını yükle ve parse et
-// ------------------------------------------------------------------
+
 async function loadData() {
   const [nodesRes, edgesRes] = await Promise.all([
     fetch("assets/nodes.geojson"),
@@ -49,7 +39,7 @@ async function loadData() {
   const nodesGeo = await nodesRes.json();
   const edgesGeo = await edgesRes.json();
 
-  // Node'ları dönüştür
+
   NODES = nodesGeo.features.map((f) => {
     const [x, y] = f.geometry.coordinates;
     const { lat, lng } = mercToWgs84(x, y);
@@ -63,7 +53,7 @@ async function loadData() {
     };
   });
 
-  // Edge'leri dönüştür
+  
   EDGES = edgesGeo.features.map((f) => ({
     from_id:    f.properties.from_id,
     to_id:      f.properties.to_id,
