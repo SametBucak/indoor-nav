@@ -2,7 +2,7 @@
 
 An indoor navigation demo built with pure HTML/CSS/JavaScript, running on georeferenced mall (İstanbul BizCevahir AVM) YandexMaps floor plans prepared in QGIS.
 
-🔗 **Live Demo:** [https://SametBucak.github.io/indoor-nav](https://SametBucak.github.io/indoor-nav)
+🔗 **Demo:** [https://SametBucak.github.io/indoor-nav](https://SametBucak.github.io/indoor-nav)
 
 ---
 
