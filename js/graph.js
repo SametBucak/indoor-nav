@@ -1,22 +1,12 @@
-/**
- * graph.js
- * Graf inşası ve Dijkstra en kısa yol algoritması.
- * Bu modül tamamen bağımsızdır — DOM veya canvas bilgisi yoktur.
- */
 
-/**
- * Kenar listesinden çift yönlü adjacency graph oluşturur.
- * @param {boolean} wheelchairMode - true ise merdiven ve yürüyen merdiven kenarları hariç tutulur
- * @returns {Object} id → [{to, dist, type}] formatında graph
- */
 function buildGraph(wheelchairMode = false) {
   const forbidden = wheelchairMode ? new Set(["stair", "escalator"]) : new Set();
   const graph = {};
   NODES.forEach((n) => (graph[n.id] = []));
 
   EDGES.forEach((e) => {
-    if (e.from_id === e.to_id) return;           // self-loop, atla
-    if (forbidden.has(e.accesstype)) return;     // erişilemez kenar
+    if (e.from_id === e.to_id) return;           
+    if (forbidden.has(e.accesstype)) return;     
 
     const d = e.distance || 10;
     graph[e.from_id].push({ to: e.to_id,   dist: d, type: e.accesstype });
@@ -26,12 +16,7 @@ function buildGraph(wheelchairMode = false) {
   return graph;
 }
 
-/**
- * Dijkstra algoritması ile en kısa yolu bulur.
- * @param {Object} graph  - buildGraph() çıktısı
- * @param {number} startId - başlangıç node id'si
- * @param {number} endId   - hedef node id'si
- * @returns {{ path: Array, totalDist: number } | null}
+
  */
 function dijkstra(graph, startId, endId) {
   const dist   = {};
@@ -65,7 +50,7 @@ function dijkstra(graph, startId, endId) {
 
   if (dist[endId] === Infinity) return null;
 
-  // Geri izleme ile tam yolu oluştur
+
   const path = [];
   let cur = endId;
   while (cur !== null) {
@@ -76,7 +61,7 @@ function dijkstra(graph, startId, endId) {
   return { path, totalDist: dist[endId] };
 }
 
-/** Yardımcı: id'ye göre node döner */
+
 function nodeById(id) {
   return NODES.find((n) => n.id === id);
 }
