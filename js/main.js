@@ -1,15 +1,10 @@
-/**
- * main.js
- * Uygulama başlatıcısı.
- * GeoJSON verilerini ve görselleri paralel yükler,
- * ardından Renderer ve UI'ı oluşturur.
- */
+
 
 (async function () {
   const canvas  = document.getElementById("c");
   const tooltip = document.getElementById("tooltip");
 
-  // GeoJSON verisini ve kat planı görsellerini paralel yükle
+ 
   const FLOOR_IMAGES = ["assets/floor-0.png", "assets/floor-1.png"];
 
   const imagePromises = FLOOR_IMAGES.map(
@@ -23,10 +18,10 @@
   );
 
   try {
-    // Veri + görseller hazır olunca başlat
+    
     const [images] = await Promise.all([
       Promise.all(imagePromises),
-      loadData(), // data.js — NODES ve EDGES'i doldurur
+      loadData(), 
     ]);
 
     const renderer = new Renderer(canvas, images, tooltip);
