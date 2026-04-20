@@ -6,7 +6,7 @@ An indoor navigation demo built with pure HTML/CSS/JavaScript, running on georef
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <!-- Add your screenshots below. Recommended size: 1280x720px -->
 
@@ -21,7 +21,7 @@ An indoor navigation demo built with pure HTML/CSS/JavaScript, running on georef
 
 ---
 
-## ✨ Features
+## Features
 
 - 🏢 Multi-floor plan viewer (Ground Floor / Floor 1)
 - 🧭 Shortest path calculation using Dijkstra's algorithm
@@ -33,7 +33,7 @@ An indoor navigation demo built with pure HTML/CSS/JavaScript, running on georef
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 indoor-nav/
@@ -62,7 +62,7 @@ indoor-nav/
 
 ---
 
-## 🚀 Running Locally
+## Running Locally
 
 The project uses `fetch()` to load GeoJSON files, so it must be served over HTTP — opening `index.html` directly in a browser will not work.
 
@@ -82,7 +82,7 @@ Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ri
 
 ---
 
-## 🗃️ Data Format
+## Data Format
 
 ### Node properties (`assets/nodes.geojson`)
 
@@ -106,7 +106,7 @@ Coordinates are in **EPSG:3857** (Web Mercator) — conversion to WGS84 is handl
 
 ---
 
-## 🔄 Updating Map Data
+## Updating Map Data
 
 When you make changes in QGIS, simply replace the GeoJSON files and push:
 
@@ -121,7 +121,7 @@ No JavaScript changes needed.
 
 ---
 
-## 🛠️ Adding a New Floor
+## Adding a New Floor
 
 1. Export the floor plan image as PNG → place in `assets/floor-N.png`
 2. Add geographic bounds to `GEO_BOUNDS` in `js/data.js`
@@ -131,7 +131,7 @@ No JavaScript changes needed.
 
 ---
 
-## 🎨 Node Type Colors
+## Node Type Colors
 
 | Type             | Color  | Description          |
 |------------------|--------|----------------------|
@@ -144,7 +144,7 @@ No JavaScript changes needed.
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - Pure HTML / CSS / JavaScript — zero dependencies
 - Canvas 2D API for map rendering
@@ -153,6 +153,3 @@ No JavaScript changes needed.
 
 ---
 
-## 📝 License
-
-MIT
