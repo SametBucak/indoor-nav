@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- HEADER -->
+  
   <header>
     <div>
       <div class="logo">indoor<span>nav</span></div>
@@ -21,10 +21,10 @@
     </div>
   </header>
 
-  <!-- ANA LAYOUT -->
+  
   <div class="main">
 
-    <!-- SIDEBAR -->
+    
     <div class="sidebar">
       <div class="sidebar-inner">
 
@@ -78,9 +78,9 @@
           <div class="route-steps" id="routeSteps"></div>
         </div>
 
-      </div><!-- /sidebar-inner -->
+      </div>
 
-      <!-- GÖSTERGE -->
+      
       <div class="legend">
         <div class="section-label">Gösterge</div>
         <div class="legend-grid">
@@ -93,25 +93,18 @@
         </div>
       </div>
 
-    </div><!-- /sidebar -->
+    </div>
 
-    <!-- HARİTA -->
+    
     <div class="map-wrap" id="mapWrap">
       <canvas id="c"></canvas>
       <div class="floor-badge" id="floorBadge">Görüntülenen: <span>Zemin Kat</span></div>
       <div class="tooltip" id="tooltip"></div>
     </div>
 
-  </div><!-- /main -->
+  </div>
 
-  <!--
-    Script yükleme sırası önemli:
-    1. data    — NODES, EDGES, GEO_BOUNDS sabitlerini tanımlar
-    2. graph   — buildGraph, dijkstra (data.js'e bağımlı)
-    3. renderer— Renderer sınıfı (data.js + graph.js'e bağımlı)
-    4. ui      — UI sınıfı (graph.js + renderer.js'e bağımlı)
-    5. main    — her şeyi başlatır
-  -->
+  
   <script src="js/data.js"></script>
   <script src="js/graph.js"></script>
   <script src="js/renderer.js"></script>
