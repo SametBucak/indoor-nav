@@ -1,8 +1,4 @@
-/**
- * ui.js
- * Sidebar etkileşimleri: mağaza seçimi, erişilebilirlik toggle,
- * rota hesaplama butonu ve adım adım talimat listesi.
- */
+
 
 const STEP_ICONS = {
   walk:     "🚶",
@@ -13,9 +9,7 @@ const STEP_ICONS = {
 };
 
 class UI {
-  /**
-   * @param {Renderer} renderer
-   */
+  
   constructor(renderer) {
     this.renderer      = renderer;
     this.selectedDest  = null;
@@ -33,9 +27,7 @@ class UI {
     document.getElementById("btn-floor1").addEventListener("click",  () => this.setFloor(1));
   }
 
-  // ------------------------------------------------------------------
-  // Kat değiştirme
-  // ------------------------------------------------------------------
+  
 
   setFloor(f) {
     this.renderer.setFloor(f);
@@ -45,9 +37,7 @@ class UI {
       `Görüntülenen: <span>${f === 0 ? "Zemin Kat" : "1. Kat"}</span>`;
   }
 
-  // ------------------------------------------------------------------
-  // Mağaza seçimi
-  // ------------------------------------------------------------------
+  
 
   selectDest(id) {
     this.selectedDest          = id;
@@ -62,9 +52,7 @@ class UI {
     this._clearResult();
   }
 
-  // ------------------------------------------------------------------
-  // Erişilebilirlik toggle
-  // ------------------------------------------------------------------
+  
 
   toggleAccess() {
     this.wheelchairMode = !this.wheelchairMode;
@@ -73,9 +61,7 @@ class UI {
     this._clearResult();
   }
 
-  // ------------------------------------------------------------------
-  // Rota hesaplama
-  // ------------------------------------------------------------------
+  
 
   findRoute() {
     this._clearResult();
@@ -91,18 +77,16 @@ class UI {
 
     this.renderer.routePath = result.path;
     this._buildStepList(result);
-    this.setFloor(1); // Hedef her zaman 1. katta
+    this.setFloor(1); 
   }
 
-  // ------------------------------------------------------------------
-  // Adım listesi oluşturma
-  // ------------------------------------------------------------------
+  
 
   _buildStepList({ path, totalDist }) {
     const nm = {};
     NODES.forEach((n) => (nm[n.id] = n));
 
-    // Ardışık kenarları türe göre grupla
+    
     const transitions = [];
     let segDist  = 0;
     let segFloor = nm[path[0].id].floor;
@@ -129,7 +113,7 @@ class UI {
     if (segDist > 0) transitions.push({ type: "walk", dist: segDist, floor: segFloor });
     transitions.push({ type: "dest", dest: this.selectedDest === 29 ? "DeFacto" : "B-Oil" });
 
-    // DOM'a yaz
+    
     const el = document.getElementById("routeSteps");
     el.innerHTML = "";
 
@@ -161,7 +145,7 @@ class UI {
       el.appendChild(div);
     });
 
-    // İstatistikler
+    
     document.getElementById("statDist").textContent  = Math.round(totalDist);
     document.getElementById("statTime").textContent  = Math.max(1, Math.round(totalDist / 80));
     document.getElementById("statSteps").textContent = transitions.length;
